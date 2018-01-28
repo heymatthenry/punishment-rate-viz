@@ -10,7 +10,7 @@ punishment_rate_df %>%
   punishment_rate_df
 
 gg <- ggplot(
-            data = punishment_rate_df, 
+            data = punishment_rate_df,
             aes(x = Punishment_Rate, xend = Imprisonment_Rate, y = State))
 # Colors -----------------#
 # Lighter green : #B8EBD7 #
@@ -23,5 +23,5 @@ gg <- gg + geom_dumbbell(
             colour = "#3E4545",
             colour_x = "#C2054C",
             colour_xend = "#43BBBF")
-gg <- gg + theme(axis.ticks = element_blank()) 
+gg <- gg + theme(axis.ticks = element_blank())
 gg
