@@ -2,17 +2,17 @@ library(dplyr)
 library(ggplot2)
 library(ggalt)
 
-punishment_rate_df <- read.csv("data/punishment_rate.csv", stringsAsFactors = FALSE)
+pr_df <- read.csv("data/punishment_rate.csv", stringsAsFactors = FALSE)
 
-punishment_rate_df %>%
+pr_df %>%
   select(-c(Punishment.rank, Imprisonment.rank)) %>%
   rename(Punishment_Rate = X2013.punishment.rate, 
          Imprisonment_Rate = X2013.imprisonment.rate) %>%
   arrange(desc(Punishment_Rate)) -> 
-  punishment_rate_df
+  pr_df
 
 gg <- ggplot(
-            data = punishment_rate_df,
+            data = pr_df,
             aes(x = Punishment_Rate, 
                 xend = Imprisonment_Rate, 
                 y = reorder(State, Punishment_Rate)))
@@ -23,9 +23,15 @@ gg <- ggplot(
 # Darker red    : #C2054C #
 # Dark gray     : #3E4545 #
 # ------------------------#
+PR_color  <- "#FE3755"
+IR_color  <- "#43BBBF"
+bar_color <- ifelse((pr_df["Punishment_Rate"] > pr_df["Imprisonment_Rate"]), 
+                    PR_color, IR_color)
 gg <- gg + geom_dumbbell(
-            colour = "#3E4545",
-            colour_x = "#C2054C",
-            colour_xend = "#43BBBF")
+            colour = bar_color,
+            # colour = "#cccccc",
+            colour_x = PR_color,
+            colour_xend = IR_color,
+            size = 1.5)
 gg <- gg + theme(axis.ticks = element_blank())
 gg
