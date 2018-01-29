@@ -31,10 +31,15 @@ gg <- gg + geom_dumbbell(
             colour = bar_color,
             colour_x = PR_color,
             colour_xend = IR_color,
-            size = 1.5)
+            size = 1.5, dot_guide = TRUE,
+            dot_guide_size=0.15)
 gg <- gg + labs(y = NULL, 
                 x = "Imprisonment Rate and Punishment Rate (2013)",
                 title = "Difference between imprisonment rate and punishment rate")
 gg <- gg + theme(plot.title = element_text(hjust = 0.5))
+gg <- gg + theme(axis.ticks = element_blank())
+gg <- gg + theme(panel.grid.minor = element_blank())
+gg <- gg + theme(panel.grid.major.y = element_blank())
+gg <- gg + theme(panel.grid.major.x = element_line())
 gg <- gg + theme(axis.ticks = element_blank())
 gg
