@@ -29,9 +29,12 @@ bar_color <- ifelse((pr_df["Punishment_Rate"] > pr_df["Imprisonment_Rate"]),
                     PR_color, IR_color)
 gg <- gg + geom_dumbbell(
             colour = bar_color,
-            # colour = "#cccccc",
             colour_x = PR_color,
             colour_xend = IR_color,
             size = 1.5)
+gg <- gg + labs(y = NULL, 
+                x = "Imprisonment Rate and Punishment Rate (2013)",
+                title = "Difference between imprisonment rate and punishment rate")
+gg <- gg + theme(plot.title = element_text(hjust = 0.5))
 gg <- gg + theme(axis.ticks = element_blank())
 gg
